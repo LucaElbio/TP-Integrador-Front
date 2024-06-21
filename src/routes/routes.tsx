@@ -1,13 +1,11 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Categories, Movies, Platforms } from '../pages';
-
+import { Route, Routes } from "react-router-dom";
+import { Categories, Movies, Platforms } from "../pages";
+import { CATEGORIES, MOVIES, PLATFORMS } from "./constants";
 
 export const PublicRoutes = () => (
-    <BrowserRouter>
-        <Routes>
-            <Route path="/movies" element={<Movies />} />
-            <Route path="/platforms" element={<Platforms />} />
-            <Route path="/categories" element={<Categories />} />
-        </Routes>
-    </BrowserRouter>
+  <Routes>
+    <Route path={MOVIES} element={<Movies />} />
+    <Route path={PLATFORMS} element={<Platforms />} />
+    <Route path={CATEGORIES} element={<Categories />} />
+  </Routes>
 );
