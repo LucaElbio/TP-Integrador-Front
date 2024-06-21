@@ -24,6 +24,7 @@ export const PlatformModal: React.FC<PlatformModalProps> = ({
   handleSave,
 }) => {
   const [name, setName] = useState<string>("");
+  const [url, setUrl] = useState<string>("");
 
   const handleSubmit = () => {
     handleSave({ name });
@@ -49,13 +50,20 @@ export const PlatformModal: React.FC<PlatformModalProps> = ({
           onChange={(e) => setName(e.target.value)}
           margin="normal"
         />
+        <TextField
+          fullWidth
+          label="URL"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          margin="normal"
+        />
         <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
+          <Button variant="contained" color="success" onClick={handleSubmit}>
             Guardar
           </Button>
           <Button
-            variant="outlined"
-            color="secondary"
+            variant="contained"
+            color="error"
             onClick={handleClose}
             sx={{ ml: 2 }}
           >
