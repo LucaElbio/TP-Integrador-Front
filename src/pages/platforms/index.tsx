@@ -8,7 +8,7 @@ import { Add } from "@mui/icons-material";
 import { PlatformModal } from "./components/createPlatformModal";
 
 export const Platforms = () => {
-  const [categories, setPlatforms] = useState<Platform[]>([]);
+  const [platforms, setPlatforms] = useState<Platform[]>([]);
   const [open, setOpen] = useState<boolean>(false);
 
   const handleOpen = () => setOpen(true);
@@ -25,9 +25,9 @@ export const Platforms = () => {
   }, []);
 
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 90},
-    { field: "name", headerName: "Nombre", width: 200},
-    { field: "url", headerName: "URL", width: 200}
+    { field: "id", headerName: "ID", width: 90 },
+    { field: "name", headerName: "Nombre", width: 200 },
+    { field: "url", headerName: "URL", width: 200 },
   ];
 
   return (
@@ -59,7 +59,7 @@ export const Platforms = () => {
           }}
         >
           <DataGrid
-            rows={categories}
+            rows={platforms}
             columns={columns}
             checkboxSelection
             localeText={esES.components.MuiDataGrid.defaultProps.localeText}
