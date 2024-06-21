@@ -21,6 +21,9 @@ import ListItemText from "@mui/material/ListItemText";
 import { Category, DesktopWindows, Movie } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { CATEGORIES, MOVIES, PLATFORMS } from "./routes/constants";
+import { ThemeProvider, PaletteMode } from '@mui/material';
+import ThemeToggle from "./components/ThemeToggle";
+import { lightTheme, darkTheme } from './theme';
 
 const drawerWidth = 240;
 
@@ -85,81 +88,94 @@ function App() {
     setOpen(false);
   };
 
+  const [mode, setMode] = React.useState<PaletteMode>('light');
+
+  const themeBack = mode === 'light' ? lightTheme : darkTheme;
+
+  const toggleTheme = () => {
+    setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+  };
+
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: "none" }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            PORTAL DE PELICULAS
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
+    <ThemeProvider theme={themeBack}>
+      <Box sx={{ display: "flex" }}>
+        <CssBaseline />
+        <AppBar position="fixed" open={open}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{ mr: 2, ...(open && { display: "none" }) }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div" mr={2}>
+              PORTAL DE PELICULAS
+            </Typography>
+            <Box display="flex" justifyContent="center" alignItems="center">
+              <ThemeToggle toggleTheme={toggleTheme} mode={mode} />
+            </Box>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          sx={{
             width: drawerWidth,
-            boxSizing: "border-box",
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={open}
-      >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "ltr" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          {[
-            {
-              text: "Peliculas",
-              icon: <Movie />,
-              onClick: () => navigate(MOVIES),
+            flexShrink: 0,
+            "& .MuiDrawer-paper": {
+              width: drawerWidth,
+              boxSizing: "border-box",
             },
-            {
-              text: "Categorias",
-              icon: <Category />,
-              onClick: () => navigate(CATEGORIES),
-            },
-            {
-              text: "Plataformas",
-              icon: <DesktopWindows />,
-              onClick: () => navigate(PLATFORMS),
-            },
-          ].map(({ text, icon, onClick }, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton onClick={onClick}>
-                <ListItemIcon>{icon}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-      </Drawer>
-      <Main open={open}>
-        <DrawerHeader />
-        <PublicRoutes /> {/* Aqui se renderizan las rutas */}
-      </Main>
-    </Box>
+          }}
+          variant="persistent"
+          anchor="left"
+          open={open}
+        >
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === "ltr" ? (
+                <ChevronLeftIcon />
+              ) : (
+                <ChevronRightIcon />
+              )}
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+          <List>
+            {[
+              {
+                text: "Peliculas",
+                icon: <Movie />,
+                onClick: () => navigate(MOVIES),
+              },
+              {
+                text: "Categorias",
+                icon: <Category />,
+                onClick: () => navigate(CATEGORIES),
+              },
+              {
+                text: "Plataformas",
+                icon: <DesktopWindows />,
+                onClick: () => navigate(PLATFORMS),
+              },
+            ].map(({ text, icon, onClick }, index) => (
+              <ListItem key={text} disablePadding>
+                <ListItemButton onClick={onClick}>
+                  <ListItemIcon>{icon}</ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+        </Drawer>
+        <Main open={open}>
+          <DrawerHeader />
+          <PublicRoutes /> {/* Aqui se renderizan las rutas */}
+        </Main>
+      </Box>
+    </ThemeProvider>
   );
 }
 
