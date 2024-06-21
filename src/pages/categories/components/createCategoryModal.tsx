@@ -50,12 +50,12 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
           margin="normal"
         />
         <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
+          <Button variant="contained" color="success" onClick={handleSubmit}>
             Guardar
           </Button>
           <Button
-            variant="outlined"
-            color="secondary"
+            variant="contained"
+            color="error"
             onClick={handleClose}
             sx={{ ml: 2 }}
           >
