@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCategories } from "../../api/categories";
 import { Category } from "../../api/categories/types";
-import { Button, Grid, Modal, Paper } from "@mui/material";
+import { Button, Grid, Paper } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { esES } from "@mui/x-data-grid/locales";
 import { Add } from "@mui/icons-material";
