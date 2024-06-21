@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Modal, Box, Button, TextField, Typography } from "@mui/material";
-import { styled } from "@mui/system";
 
 interface CategoryModalProps {
   open: boolean;
