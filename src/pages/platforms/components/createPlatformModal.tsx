@@ -4,7 +4,7 @@ import { Modal, Box, Button, TextField, Typography } from "@mui/material";
 interface PlatformModalProps {
   open: boolean;
   handleClose: () => void;
-  handleSave: (category: { name: string }) => void;
+  handleSave: (platform: { name: string }) => void;
 }
 
 const style = {
@@ -18,7 +18,7 @@ const style = {
   p: 4,
 };
 
-export const CategoryModal: React.FC<PlatformModalProps> = ({
+export const PlatformModal: React.FC<PlatformModalProps> = ({
   open,
   handleClose,
   handleSave,
@@ -40,7 +40,7 @@ export const CategoryModal: React.FC<PlatformModalProps> = ({
     >
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          Crear Categoría
+          Crear Plataforma
         </Typography>
         <TextField
           fullWidth
@@ -50,12 +50,12 @@ export const CategoryModal: React.FC<PlatformModalProps> = ({
           margin="normal"
         />
         <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
-          <Button variant="contained" color="success" onClick={handleSubmit}>
+          <Button variant="contained" color="primary" onClick={handleSubmit}>
             Guardar
           </Button>
           <Button
-            variant="contained"
-            color="error"
+            variant="outlined"
+            color="secondary"
             onClick={handleClose}
             sx={{ ml: 2 }}
           >

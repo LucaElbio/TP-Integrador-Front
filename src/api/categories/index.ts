@@ -8,15 +8,15 @@ export const getCategories = async () => {
     data: [
       {
         id: 1,
-        nombre: "Acción",
+        name: "Acción",
       },
       {
         id: 2,
-        nombre: "Comedia",
+        name: "Comedia",
       },
       {
         id: 3,
-        nombre: "Drama",
+        name: "Drama",
       },
     ],
   };

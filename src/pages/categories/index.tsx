@@ -14,7 +14,7 @@ export const Categories = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleSave = (category: { nombre: string }) => {
+  const handleSave = (category: { name: string }) => {
     // postCategory({})
   };
 
@@ -26,7 +26,7 @@ export const Categories = () => {
 
   const columns: GridColDef[] = [
     { field: "id", headerName: "ID" },
-    { field: "nombre", headerName: "Nombre" },
+    { field: "name", headerName: "Nombre" },
   ];
 
   return (
