@@ -18,6 +18,9 @@ export const Categories = () => {
     postCategory({ name }).then(({ data }) => {
       alert(data.message);
     });
+    getCategories().then(({ data }) => {
+      setCategories(data);
+    });
   };
 
   useEffect(() => {

@@ -24,10 +24,11 @@ export const Movies = () => {
   const handleSave = (movie: Movie) => {
     postMovie(movie).then(({ data }) => {
       alert(data.message);
+      loadData();
     });
   };
 
-  useEffect(() => {
+  const loadData = () => {
     getCategories().then(({ data }) => {
       setCategories(data);
     });
@@ -37,6 +38,10 @@ export const Movies = () => {
     getMovies().then(({ data }) => {
       setMovies(data);
     });
+  };
+
+  useEffect(() => {
+    loadData();
   }, []);
 
   const columns: GridColDef<Movie>[] = [
@@ -51,16 +56,16 @@ export const Movies = () => {
     {
       align: "center",
       headerAlign: "center",
-      field: "categoryId",
+      field: "category",
       headerName: "Categoría",
-      valueFormatter: (value) => value,
+      valueFormatter: (value: any) => value?.name,
     },
     {
       align: "center",
       headerAlign: "center",
-      field: "platformId",
+      field: "platform",
       headerName: "Plataforma",
-      valueFormatter: (value) => value,
+      valueFormatter: (value: any) => value?.name,
     },
     {
       align: "center",

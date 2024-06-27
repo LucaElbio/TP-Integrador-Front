@@ -21,10 +21,9 @@ import ListItemText from "@mui/material/ListItemText";
 import { Category, DesktopWindows, Movie } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { CATEGORIES, MOVIES, PLATFORMS } from "./routes/constants";
-import { ThemeProvider, PaletteMode } from '@mui/material';
+import { ThemeProvider, PaletteMode } from "@mui/material";
 import ThemeToggle from "./components/ThemeToggle";
-import { lightTheme, darkTheme } from './theme';
-
+import { lightTheme, darkTheme } from "./theme";
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
@@ -88,12 +87,12 @@ function App() {
     setOpen(false);
   };
 
-  const [mode, setMode] = React.useState<PaletteMode>('light');
+  const [mode, setMode] = React.useState<PaletteMode>("light");
 
-  const themeBack = mode === 'light' ? lightTheme : darkTheme;
+  const themeBack = mode === "light" ? lightTheme : darkTheme;
 
   const toggleTheme = () => {
-    setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
   };
 
   return (

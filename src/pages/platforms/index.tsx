@@ -18,6 +18,9 @@ export const Platforms = () => {
     postPlatform(platform).then(({ data }) => {
       alert(data.message);
     });
+    getPlatforms().then(({ data }) => {
+      setPlatforms(data);
+    });
   };
 
   useEffect(() => {

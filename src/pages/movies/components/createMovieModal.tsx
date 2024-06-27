@@ -53,7 +53,6 @@ export const MovieModal: React.FC<MovieModalProps> = ({
       minimumAge,
       categoryId,
       platformId,
-      id: 0,
     });
     settitle("");
     setduration(0);
