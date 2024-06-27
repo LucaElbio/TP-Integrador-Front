@@ -1,8 +1,8 @@
 export interface Movie {
-  id: number;
-  idCategoria: number;
-  idPlataforma: number;
-  titulo: string;
-  duracion: number;
-  edadMinima: number;
+  id?: number;
+  categoryId?: number;
+  platformId?: number;
+  title: string;
+  duration: number;
+  minimumAge: number;
 }

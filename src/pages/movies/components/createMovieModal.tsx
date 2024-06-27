@@ -40,26 +40,26 @@ export const MovieModal: React.FC<MovieModalProps> = ({
   categories,
   platforms,
 }) => {
-  const [titulo, setTitulo] = useState<string>("");
-  const [duracion, setDuracion] = useState<number>(0);
-  const [edadMinima, setEdadMinima] = useState<number>(0);
-  const [idCategoria, setIdCategoria] = useState<number>(0);
-  const [idPlataforma, setIdPlataforma] = useState<number>(0);
+  const [title, settitle] = useState<string>("");
+  const [duration, setduration] = useState<number>(0);
+  const [minimumAge, setminimumAge] = useState<number>(0);
+  const [categoryId, setcategoryId] = useState<number>(0);
+  const [platformId, setplatformId] = useState<number>(0);
 
   const handleSubmit = () => {
     handleSave({
-      titulo,
-      duracion,
-      edadMinima,
-      idCategoria,
-      idPlataforma,
+      title,
+      duration,
+      minimumAge,
+      categoryId,
+      platformId,
       id: 0,
     });
-    setTitulo("");
-    setDuracion(0);
-    setEdadMinima(0);
-    setIdCategoria(0);
-    setIdPlataforma(0);
+    settitle("");
+    setduration(0);
+    setminimumAge(0);
+    setcategoryId(0);
+    setplatformId(0);
     handleClose();
   };
 
@@ -77,33 +77,33 @@ export const MovieModal: React.FC<MovieModalProps> = ({
         <TextField
           fullWidth
           label="Título"
-          value={titulo}
-          onChange={(e) => setTitulo(e.target.value)}
+          value={title}
+          onChange={(e) => settitle(e.target.value)}
           margin="normal"
         />
         <TextField
           fullWidth
           label="Duración (minutos)"
           type="number"
-          value={duracion}
-          onChange={(e) => setDuracion(Number(e.target.value))}
+          value={duration}
+          onChange={(e) => setduration(Number(e.target.value))}
           margin="normal"
         />
         <TextField
           fullWidth
           label="Edad Mínima"
           type="number"
-          value={edadMinima}
-          onChange={(e) => setEdadMinima(Number(e.target.value))}
+          value={minimumAge}
+          onChange={(e) => setminimumAge(Number(e.target.value))}
           margin="normal"
         />
         <FormControl fullWidth margin="normal">
           <InputLabel id="categoria-label">Categoría</InputLabel>
           <Select
             labelId="categoria-label"
-            value={idCategoria}
+            value={categoryId}
             label="Categoría"
-            onChange={(e) => setIdCategoria(Number(e.target.value))}
+            onChange={(e) => setcategoryId(Number(e.target.value))}
           >
             {categories.map((category) => (
               <MenuItem key={category.id} value={category.id}>
@@ -116,9 +116,9 @@ export const MovieModal: React.FC<MovieModalProps> = ({
           <InputLabel id="plataforma-label">Plataforma</InputLabel>
           <Select
             labelId="plataforma-label"
-            value={idPlataforma}
+            value={platformId}
             label="Plataforma"
-            onChange={(e) => setIdPlataforma(Number(e.target.value))}
+            onChange={(e) => setplatformId(Number(e.target.value))}
           >
             {platforms.map((platform) => (
               <MenuItem key={platform.id} value={platform.id}>

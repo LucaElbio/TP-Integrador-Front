@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getMovies } from "../../api/movies";
+import { getMovies, postMovie } from "../../api/movies";
 import { Movie } from "../../api/movies/types";
 import { Button, Grid, Paper } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
@@ -21,8 +21,10 @@ export const Movies = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleSave = (movies: Movie) => {
-    // postCategory({})
+  const handleSave = (movie: Movie) => {
+    postMovie(movie).then(({ data }) => {
+      alert(data.message);
+    });
   };
 
   useEffect(() => {
@@ -43,34 +45,34 @@ export const Movies = () => {
       width: 200,
       align: "center",
       headerAlign: "center",
-      field: "titulo",
+      field: "title",
       headerName: "Título",
     },
     {
       align: "center",
       headerAlign: "center",
-      field: "idCategoria",
+      field: "categoryId",
       headerName: "Categoría",
       valueFormatter: (value) => value,
     },
     {
       align: "center",
       headerAlign: "center",
-      field: "idPlataforma",
+      field: "platformId",
       headerName: "Plataforma",
       valueFormatter: (value) => value,
     },
     {
       align: "center",
       headerAlign: "center",
-      field: "duracion",
+      field: "duration",
       headerName: "Duración",
       valueFormatter: (value) => value + " min.",
     },
     {
       align: "center",
       headerAlign: "center",
-      field: "edadMinima",
+      field: "minimumAge",
       headerName: "Edad Mínima",
       valueFormatter: (value) => value + " años",
     },

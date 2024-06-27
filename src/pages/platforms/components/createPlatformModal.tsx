@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Modal, Box, Button, TextField, Typography } from "@mui/material";
+import { Platform } from "../../../api/platforms/types";
 
 interface PlatformModalProps {
   open: boolean;
   handleClose: () => void;
-  handleSave: (platform: { name: string }) => void;
+  handleSave: (platform: Platform) => void;
 }
 
 const style = {
@@ -27,7 +28,7 @@ export const PlatformModal: React.FC<PlatformModalProps> = ({
   const [url, setUrl] = useState<string>("");
 
   const handleSubmit = () => {
-    handleSave({ name });
+    handleSave({ name, url });
     setName("");
     handleClose();
   };

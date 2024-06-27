@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCategories } from "../../api/categories";
+import { getCategories, postCategory } from "../../api/categories";
 import { Category } from "../../api/categories/types";
 import { Button, Grid, Paper } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
@@ -14,8 +14,10 @@ export const Categories = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleSave = (category: { name: string }) => {
-    // postCategory({})
+  const handleSave = ({ name }: { name: string }) => {
+    postCategory({ name }).then(({ data }) => {
+      alert(data.message);
+    });
   };
 
   useEffect(() => {

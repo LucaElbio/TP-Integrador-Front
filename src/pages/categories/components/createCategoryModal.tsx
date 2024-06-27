@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Modal, Box, Button, TextField, Typography } from "@mui/material";
+import { Category } from "../../../api/categories/types";
 
 interface PlatformModalProps {
   open: boolean;
   handleClose: () => void;
-  handleSave: (category: { name: string }) => void;
+  handleSave: (category: Category) => void;
 }
 
 const style = {

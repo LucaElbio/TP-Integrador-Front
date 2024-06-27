@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getPlatforms } from "../../api/platforms";
+import { getPlatforms, postPlatform } from "../../api/platforms";
 import { Platform } from "../../api/platforms/types";
 import { Button, Grid, Paper } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
@@ -14,8 +14,10 @@ export const Platforms = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleSave = (platforms: { name: string }) => {
-    // postCategory({})
+  const handleSave = (platform: Platform) => {
+    postPlatform(platform).then(({ data }) => {
+      alert(data.message);
+    });
   };
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 export interface Platform {
-    id: number;
+    id?: number;
     name: string;
     url: string;
   }
