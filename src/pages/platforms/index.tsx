@@ -15,11 +15,10 @@ export const Platforms = () => {
   const handleClose = () => setOpen(false);
 
   const handleSave = (platform: Platform) => {
-    postPlatform(platform).then(({ data }) => {
-      alert(data.message);
-    });
-    getPlatforms().then(({ data }) => {
-      setPlatforms(data);
+    postPlatform(platform).then(() => {
+      getPlatforms().then(({ data }) => {
+        setPlatforms(data);
+      });
     });
   };
 

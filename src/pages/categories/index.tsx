@@ -15,11 +15,10 @@ export const Categories = () => {
   const handleClose = () => setOpen(false);
 
   const handleSave = ({ name }: { name: string }) => {
-    postCategory({ name }).then(({ data }) => {
-      alert(data.message);
-    });
-    getCategories().then(({ data }) => {
-      setCategories(data);
+    postCategory({ name }).then(() => {
+      getCategories().then(({ data }) => {
+        setCategories(data);
+      });
     });
   };
 
