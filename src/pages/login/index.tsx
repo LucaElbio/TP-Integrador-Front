@@ -2,6 +2,7 @@ import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { postLogin } from "../../api/login";
 import { useUser } from "../context/UserContext";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -23,18 +24,15 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    // Post login endpoint with email and password
-    // const response = await postLogin({ email, password });
-    const userMock = { id: "1", email: "example@gmail.com", name: "Example" };
-    setUser(userMock);
-    navigate("/movies");
     // post to login endpoint with email and password
-    // postLogin({ email, password }).then((response) => {
-    //     if (response){
-    //         setUser(response.data)
-    //     } else {
-    //     }
-    // });
+    postLogin({ email, password })
+      .then(({ data }) => {
+        setUser({ id: data.id, name: data.name });
+        navigate("/movies");
+      })
+      .catch(({response}) => {
+        alert(response.data.message);
+      });
   };
 
   const handleInputChange =
