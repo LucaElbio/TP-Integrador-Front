@@ -1,5 +1,6 @@
-import { Platforms } from "./platforms";
-import { Movies } from "./movies";
 import { Categories } from "./categories";
+import { Login } from "./login";
+import { Movies } from "./movies";
+import { Platforms } from "./platforms";
 
-export { Platforms, Movies, Categories };
+export { Categories, Login, Movies, Platforms };
