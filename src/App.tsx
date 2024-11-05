@@ -18,9 +18,9 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { Category, DesktopWindows, Movie } from "@mui/icons-material";
+import { Category, DesktopWindows, Movie, Star } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { CATEGORIES, MOVIES, PLATFORMS } from "./routes/constants";
+import { CATEGORIES, FAVORITES, MOVIES, PLATFORMS } from "./routes/constants";
 import { ThemeProvider, PaletteMode } from "@mui/material";
 import ThemeToggle from "./components/ThemeToggle";
 import { lightTheme, darkTheme } from "./theme";
@@ -157,6 +157,11 @@ function App() {
                 text: "Plataformas",
                 icon: <DesktopWindows />,
                 onClick: () => navigate(PLATFORMS),
+              },
+              {
+                text: "Favoritos",
+                icon: <Star />,
+                onClick: () => navigate(FAVORITES),
               },
             ].map(({ text, icon, onClick }, index) => (
               <ListItem key={text} disablePadding>
