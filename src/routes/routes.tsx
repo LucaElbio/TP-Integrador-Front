@@ -1,11 +1,36 @@
-import { Route, Routes } from "react-router-dom";
-import { Categories, Movies, Platforms } from "../pages";
-import { CATEGORIES, MOVIES, PLATFORMS } from "./constants";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { Categories, Login, Movies, Platforms } from "../pages";
+import ProtectedRoute from "./ProtectedRoute";
 
-export const PublicRoutes = () => (
-  <Routes>
-    <Route path={MOVIES} element={<Movies />} />
-    <Route path={PLATFORMS} element={<Platforms />} />
-    <Route path={CATEGORIES} element={<Categories />} />
-  </Routes>
-);
+export const PublicRoutes = () => {
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route
+        path="/categories"
+        element={
+          <ProtectedRoute>
+            <Categories />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/platforms"
+        element={
+          <ProtectedRoute>
+            <Platforms />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/movies"
+        element={
+          <ProtectedRoute>
+            <Movies />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="*" element={<Navigate to="/login" />} />
+    </Routes>
+  );
+};
