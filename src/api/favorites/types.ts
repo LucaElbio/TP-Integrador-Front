@@ -2,7 +2,11 @@ export interface Favorite {
   id?: number;
   userId?: number;
   movieId?: number;
-  title?: string;
-  duration?: number;
-  category?: string;
+  movie?: {
+    title: string;
+    duration: number;
+    category: {
+      name: string;
+    };
+  };
 }
