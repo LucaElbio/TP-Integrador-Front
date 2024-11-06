@@ -1,6 +1,6 @@
 import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import { styled } from "@mui/system";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postLogin } from "../../api/login";
 import { useUser } from "../context/UserContext";
@@ -18,10 +18,21 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 }));
 
 export const Login = () => {
-  const { setUser } = useUser();
+  const { user, setUser } = useUser();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Limpiar el usuario del contexto cuando se monte el componente
+    setUser(null);
+  }, [setUser]);
+
+  useEffect(() => {
+    if (user) {
+      navigate("/movies");
+    }
+  }, [user, navigate]);
 
   const handleLogin = async () => {
     // post to login endpoint with email and password

@@ -10,12 +10,16 @@ import { Movie } from "../../api/movies/types";
 import { getPlatforms } from "../../api/platforms";
 import { Platform } from "../../api/platforms/types";
 import { MovieModal } from "./components/createMovieModal";
+import { Delete, Star } from "@mui/icons-material";
+import { postFavorite } from "../../api/favorites";
+import { useUser } from "../context/UserContext";
 
 export const Movies = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [platforms, setPlatforms] = useState<Platform[]>([]);
   const [open, setOpen] = useState<boolean>(false);
+  const { user } = useUser(); 
 
   const handleOpen = () => {
     getCategories().then(({ data }) => {
@@ -50,6 +54,15 @@ export const Movies = () => {
   useEffect(() => {
     loadData();
   }, []);
+
+  const handleFavorite = (id: number) => {
+    if (!user) return;
+    postFavorite(Number(user.id), id).then(() => {
+      getMovies().then(({ data }) => {
+        setMovies(data);
+      });
+    });
+  };
 
   const columns: GridColDef<Movie>[] = [
     {
@@ -128,17 +141,30 @@ export const Movies = () => {
                 align: "center",
                 headerAlign: "center",
                 renderCell: (params) => (
-                  <Button
-                    variant="contained"
-                    color="error"
-                    onClick={() => {
-                      if (params.row.id !== undefined) {
-                        handleDelete(params.row.id);
-                      }
-                    }}
-                  >
-                    Eliminar
-                  </Button>
+                  <>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      onClick={() => {
+                        if (params.row.id !== undefined) {
+                          handleDelete(params.row.id);
+                        }
+                      }}
+                    >
+                      <Delete />
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => {
+                        if (params.row.id !== undefined) {
+                          handleFavorite(params.row.id);
+                        }
+                      }}
+                    >
+                      <Star />
+                    </Button>
+                  </>
                 ),
               },
             ]}

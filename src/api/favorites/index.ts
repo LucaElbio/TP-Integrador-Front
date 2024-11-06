@@ -7,10 +7,10 @@ export const getFavorites = async () => {
   return API.get<Favorite[]>(BASE_URL);
 };
 
-export const postFavorite = async (body: Favorite) => {
-  return API.post(BASE_URL, body);
+export const postFavorite = async (userId: number, movieId: number) => {
+  return API.post(BASE_URL, { userId, movieId });
 };
 
-export const deleteFavorite = async (id?: number) => {
-  return API.delete(BASE_URL + `/${id}`);
+export const deleteFavorite = async (userId: number, movieId: number) => {
+  return API.delete(BASE_URL, { data: { userId, movieId } });
 };

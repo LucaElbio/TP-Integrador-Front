@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCategories, postCategory } from "../../api/categories";
+import { deleteCategory, getCategories, postCategory } from "../../api/categories";
 import { Category } from "../../api/categories/types";
 import { Button, Grid, Paper } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
@@ -22,10 +22,20 @@ export const Categories = () => {
     });
   };
 
-  useEffect(() => {
+  const handleDelete = (id: number) => {
+    deleteCategory(id).then(() => {
+      loadData();
+    });
+  };
+
+  const loadData = () => {
     getCategories().then(({ data }) => {
       setCategories(data);
     });
+  };
+
+  useEffect(() => {
+    loadData();
   }, []);
 
   const columns: GridColDef[] = [
@@ -63,7 +73,29 @@ export const Categories = () => {
         >
           <DataGrid
             rows={categories}
-            columns={columns}
+            columns={[
+              ...columns,
+              {
+                field: "actions",
+                headerName: "Acciones",
+                width: 150,
+                align: "center",
+                headerAlign: "center",
+                renderCell: (params) => (
+                  <Button
+                    variant="contained"
+                    color="error"
+                    onClick={() => {
+                      if (params.row.id !== undefined) {
+                        handleDelete(params.row.id);
+                      }
+                    }}
+                  >
+                    Eliminar
+                  </Button>
+                ),
+              },
+            ]}
             checkboxSelection
             localeText={esES.components.MuiDataGrid.defaultProps.localeText}
             hideFooterPagination
