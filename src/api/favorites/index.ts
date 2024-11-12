@@ -4,7 +4,7 @@ import { Favorite } from "./types";
 const BASE_URL = "/favorite-movies";
 
 export const getFavorites = async (userId: number) => {
-  return API.get<Favorite[]>(BASE_URL, { params: { userId } });
+  return API.get<Favorite[]>(BASE_URL + `/${userId}`);
 };
 
 export const postFavorite = async (userId: number, movieId: number) => {

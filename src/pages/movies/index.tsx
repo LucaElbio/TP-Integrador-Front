@@ -11,7 +11,7 @@ import { getPlatforms } from "../../api/platforms";
 import { Platform } from "../../api/platforms/types";
 import { MovieModal } from "./components/createMovieModal";
 import { Delete, Star } from "@mui/icons-material";
-import { postFavorite } from "../../api/favorites";
+import { deleteFavorite, postFavorite } from "../../api/favorites";
 import { useUser } from "../context/UserContext";
 
 export const Movies = () => {
@@ -46,7 +46,7 @@ export const Movies = () => {
   };
 
   const loadData = () => {
-    getMovies().then(({ data }) => {
+    getMovies(Number(user!.id)).then(({ data }) => {
       setMovies(data);
     });
   };
@@ -55,13 +55,21 @@ export const Movies = () => {
     loadData();
   }, []);
 
-  const handleFavorite = (id: number) => {
+  const handleFavorite = (id: number, favorite: boolean) => {
     if (!user) return;
-    postFavorite(Number(user.id), id).then(() => {
-      getMovies().then(({ data }) => {
-        setMovies(data);
+    if(favorite){
+      deleteFavorite(Number(user.id), id).then(() => {
+        getMovies(Number(user!.id)).then(({ data }) => {
+          setMovies(data);
+        });
       });
-    });
+    } else {
+      postFavorite(Number(user.id), id).then(() => {
+        getMovies(Number(user!.id)).then(({ data }) => {
+          setMovies(data);
+        });
+      });
+    }
   };
 
   const columns: GridColDef<Movie>[] = [
@@ -132,6 +140,7 @@ export const Movies = () => {
         >
           <DataGrid
             rows={movies}
+            disableRowSelectionOnClick
             columns={[
               ...columns,
               {
@@ -158,8 +167,12 @@ export const Movies = () => {
                       color="primary"
                       onClick={() => {
                         if (params.row.id !== undefined) {
-                          handleFavorite(params.row.id);
+                          handleFavorite(params.row.id, params.row.favorite);
                         }
+                      }}
+                      style={{
+                        backgroundColor: params.row.favorite ? "#FFFFFF" : "#1976d2", // Fondo blanco si es favorito, color primario si no
+                        color: params.row.favorite ? "#000000" : "#FFFFFF"             // Estrella negra si es favorito, blanco si no
                       }}
                     >
                       <Star />
@@ -168,7 +181,6 @@ export const Movies = () => {
                 ),
               },
             ]}
-            checkboxSelection
             localeText={esES.components.MuiDataGrid.defaultProps.localeText}
             hideFooterPagination
           />

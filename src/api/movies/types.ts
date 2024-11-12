@@ -5,4 +5,5 @@ export interface Movie {
   title: string;
   duration: number;
   minimumAge: number;
+  favorite: boolean;
 }

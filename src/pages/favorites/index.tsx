@@ -54,8 +54,8 @@ export const Favorites = () => {
         >
           <DataGrid
             rows={favorites}
+            disableRowSelectionOnClick
             columns={columns}
-            checkboxSelection
             localeText={esES.components.MuiDataGrid.defaultProps.localeText}
             hideFooterPagination
           />

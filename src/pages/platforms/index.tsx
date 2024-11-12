@@ -74,6 +74,7 @@ export const Platforms = () => {
         >
           <DataGrid
             rows={platforms}
+            disableRowSelectionOnClick
             columns={[
               ...columns,
               {
@@ -97,7 +98,6 @@ export const Platforms = () => {
                 ),
               },
             ]}
-            checkboxSelection
             localeText={esES.components.MuiDataGrid.defaultProps.localeText}
             hideFooterPagination
           />
