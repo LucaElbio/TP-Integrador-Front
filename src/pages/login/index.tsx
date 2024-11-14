@@ -41,15 +41,15 @@ export const Login = () => {
         setUser({ id: data.id, name: data.name });
         navigate("/movies");
       })
-      .catch(({response}) => {
+      .catch(({ response }) => {
         alert(response.data.message);
       });
   };
 
   const handleInputChange =
     (setter: React.Dispatch<React.SetStateAction<string>>) =>
-    (e: ChangeEvent<HTMLInputElement>) =>
-      setter(e.target.value);
+      (e: ChangeEvent<HTMLInputElement>) =>
+        setter(e.target.value);
 
   return (
     <Grid
@@ -61,7 +61,7 @@ export const Login = () => {
         background: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
       }}
     >
-      <StyledPaper>
+      <StyledPaper sx={{ ml: "200px" }}>
         <Box textAlign="center" mb={2}>
           <Typography variant="h4" component="h1" gutterBottom>
             Login

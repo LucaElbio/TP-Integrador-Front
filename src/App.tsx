@@ -160,12 +160,12 @@ function App() {
             <List>
               {[
                 {
-                  text: "Peliculas",
+                  text: "Películas",
                   icon: <Movie />,
                   onClick: () => navigate(MOVIES),
                 },
                 {
-                  text: "Categorias",
+                  text: "Categorías",
                   icon: <Category />,
                   onClick: () => navigate(CATEGORIES),
                 },
@@ -175,11 +175,11 @@ function App() {
                   onClick: () => navigate(PLATFORMS),
                 },
                 {
-                text: "Favoritos",
-                icon: <Star />,
-                onClick: () => navigate(FAVORITES),
-              },
-            ].map(({ text, icon, onClick }, index) => (
+                  text: "Favoritos",
+                  icon: <Star />,
+                  onClick: () => navigate(FAVORITES),
+                },
+              ].map(({ text, icon, onClick }, index) => (
                 <ListItem key={text} disablePadding>
                   <ListItemButton onClick={onClick}>
                     <ListItemIcon>{icon}</ListItemIcon>
@@ -193,7 +193,7 @@ function App() {
         )}
         <Main open={open}>
           {user && <DrawerHeader />}
-          <PublicRoutes /> {}
+          <PublicRoutes /> { }
         </Main>
       </Box>
     </ThemeProvider>

@@ -4,7 +4,7 @@ import { Platform } from "../../api/platforms/types";
 import { Button, Grid, Paper } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { esES } from "@mui/x-data-grid/locales";
-import { Add } from "@mui/icons-material";
+import { Add, Delete } from "@mui/icons-material";
 import { PlatformModal } from "./components/createPlatformModal";
 
 export const Platforms = () => {
@@ -45,12 +45,12 @@ export const Platforms = () => {
   ];
 
   return (
-    <div>
+    <div style={{ padding: "0px 20px" }}>
       <Grid container spacing={2}>
         <Grid item lg={10}>
           <h1>Plataformas</h1>
         </Grid>
-        <Grid item lg={2} style={{ alignSelf: "center", textAlign: "right" }}>
+        <Grid item lg={2} style={{ alignSelf: "center", textAlign: "right", position: "fixed", right: "20px" }}>
           <Button
             variant="contained"
             color="success"
@@ -75,6 +75,11 @@ export const Platforms = () => {
           <DataGrid
             rows={platforms}
             disableRowSelectionOnClick
+            sx={{
+              '& .MuiDataGrid-overlayWrapper': {
+                height: '50px',
+              },
+            }}
             columns={[
               ...columns,
               {
@@ -93,7 +98,7 @@ export const Platforms = () => {
                       }
                     }}
                   >
-                    Eliminar
+                    <Delete />
                   </Button>
                 ),
               },

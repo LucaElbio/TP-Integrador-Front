@@ -4,7 +4,7 @@ import { Category } from "../../api/categories/types";
 import { Button, Grid, Paper } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { esES } from "@mui/x-data-grid/locales";
-import { Add } from "@mui/icons-material";
+import { Add, Delete } from "@mui/icons-material";
 import { CategoryModal } from "./components/createCategoryModal";
 
 export const Categories = () => {
@@ -44,12 +44,12 @@ export const Categories = () => {
   ];
 
   return (
-    <div>
+    <div style={{ padding: "0px 20px" }}>
       <Grid container spacing={2}>
         <Grid item lg={10}>
           <h1>Categorías</h1>
         </Grid>
-        <Grid item lg={2} style={{ alignSelf: "center", textAlign: "right" }}>
+        <Grid item lg={2} style={{ alignSelf: "center", textAlign: "right", position: "fixed", right: "20px" }}>
           <Button
             variant="contained"
             color="success"
@@ -73,6 +73,12 @@ export const Categories = () => {
         >
           <DataGrid
             rows={categories}
+            sx={{
+              width: "600px",
+              '& .MuiDataGrid-overlayWrapper': {
+                height: '50px',
+              },
+            }}
             disableRowSelectionOnClick
             columns={[
               ...columns,
@@ -92,7 +98,7 @@ export const Categories = () => {
                       }
                     }}
                   >
-                    Eliminar
+                    <Delete />
                   </Button>
                 ),
               },

@@ -35,7 +35,7 @@ export const Favorites = () => {
   ];
 
   return (
-    <div>
+    <div style={{ padding: "0px 20px" }}>
       <Grid container spacing={2}>
         <Grid item lg={10}>
           <h1>Películas favoritas</h1>
@@ -55,6 +55,11 @@ export const Favorites = () => {
           <DataGrid
             rows={favorites}
             disableRowSelectionOnClick
+            sx={{
+              '& .MuiDataGrid-overlayWrapper': {
+                height: '50px',
+              },
+            }}
             columns={columns}
             localeText={esES.components.MuiDataGrid.defaultProps.localeText}
             hideFooterPagination

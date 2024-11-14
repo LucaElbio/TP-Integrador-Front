@@ -19,7 +19,7 @@ export const Movies = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [platforms, setPlatforms] = useState<Platform[]>([]);
   const [open, setOpen] = useState<boolean>(false);
-  const { user } = useUser(); 
+  const { user } = useUser();
 
   const handleOpen = () => {
     getCategories().then(({ data }) => {
@@ -57,7 +57,7 @@ export const Movies = () => {
 
   const handleFavorite = (id: number, favorite: boolean) => {
     if (!user) return;
-    if(favorite){
+    if (favorite) {
       deleteFavorite(Number(user.id), id).then(() => {
         getMovies(Number(user!.id)).then(({ data }) => {
           setMovies(data);
@@ -111,12 +111,12 @@ export const Movies = () => {
   ];
 
   return (
-    <div>
+    <div style={{ padding: "0px 20px" }}>
       <Grid container spacing={2}>
         <Grid item lg={10}>
           <h1>Películas</h1>
         </Grid>
-        <Grid item lg={2} style={{ alignSelf: "center", textAlign: "right" }}>
+        <Grid item lg={2} style={{ alignSelf: "center", textAlign: "right", position: "fixed", right: "20px" }}>
           <Button
             variant="contained"
             color="success"
@@ -141,12 +141,17 @@ export const Movies = () => {
           <DataGrid
             rows={movies}
             disableRowSelectionOnClick
+            sx={{
+              '& .MuiDataGrid-overlayWrapper': {
+                height: '50px',
+              },
+            }}
             columns={[
               ...columns,
               {
                 field: "actions",
                 headerName: "Acciones",
-                width: 150,
+                width: 200,
                 align: "center",
                 headerAlign: "center",
                 renderCell: (params) => (
@@ -159,6 +164,7 @@ export const Movies = () => {
                           handleDelete(params.row.id);
                         }
                       }}
+                      sx={{ marginRight: "15px" }}
                     >
                       <Delete />
                     </Button>
